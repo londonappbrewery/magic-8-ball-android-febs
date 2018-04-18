@@ -2,6 +2,7 @@ package com.londonappbrewery.magiceightball;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,7 +32,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // assigns a random image. This line creates the Random object on the fly and uses as bound the very length of the array so to avoid OutOfBoundExceptions
-                mainText.setText(frasi[new Random().nextInt(frasi.length)]);
+                String nuovaFrase;
+                String currentText;
+                // assign a new string only if it's different from the current one. Otherwise pick another until you got a valid one.
+                do {
+                    nuovaFrase = frasi[new Random().nextInt(frasi.length)];
+                    currentText = (String) mainText.getText();
+                } while (nuovaFrase.compareTo(currentText) == 0);
+                mainText.setText(nuovaFrase);
             }
         });
 
