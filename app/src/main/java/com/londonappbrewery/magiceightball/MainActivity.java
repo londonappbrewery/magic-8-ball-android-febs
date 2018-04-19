@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 
+/** shows a window with a button and a text. Clicking the button will change the text by picking one randomly from an array of Strings */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final String[] frasi = {
+        final String[] sentences = {
                 "Garofalo",
                 "Simpa",
                 "Canoli",
@@ -32,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // assigns a random image. This line creates the Random object on the fly and uses as bound the very length of the array so to avoid OutOfBoundExceptions
-                String nuovaFrase;
+                String newSentence;
                 String currentText;
                 // assign a new string only if it's different from the current one. Otherwise pick another until you got a valid one.
                 do {
-                    nuovaFrase = frasi[new Random().nextInt(frasi.length)];
+                    newSentence = sentences[new Random().nextInt(sentences.length)];
                     currentText = (String) mainText.getText();
-                } while (nuovaFrase.compareTo(currentText) == 0);
-                mainText.setText(nuovaFrase);
+                } while (newSentence.compareTo(currentText) == 0);
+                mainText.setText(newSentence);
             }
         });
 
